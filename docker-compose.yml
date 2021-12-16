@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  # mongo:
+  #   container_name: mongodb
+  #   image: mongo
+  #   restart: 'always'
+  #   volumes:
+  #     - ./mongo:/data
+  #   environment:
+  #     - TZ=Asia/Shanghai
+  mysql:
+    container_name: mysql
+    image: mysql:5.6
+    restart: always
+    volumes:        #挂载当前的data目录到容器默认mysql存储目录
+      - ./mysql/mydir:/mydir
+      - ./mysql/datadir:/var/lib/mysql
+      - ./mysql/conf/my.cnf:/etc/my.cnf
+      #      数据库还原目录 可将需要还原的sql文件放在这里
+      - /mysql/docker/source:/docker-entrypoint-initdb.d
+    environment:                        #环境变量
+      MYSQL_USER: qzr
+      MYSQL_PASS: a12345
+      MYSQL_ROOT_PASSWORD: a123456    #mysql的root密码
+      MYSQL_DATABASE: page     #mysql的初始化数据库
+    ports:
+      - "3306:3306"
+  app:
+    image: node:12-alpine
+    working_dir: /code
+    volumes:
+      - .:/code:cached
+    ports:
+      - 7001:7001
+    command: npm run start:dev
+  # app:
+  #   container_name: app
+  #   build: .
+  #   ports:
+  #     - 7001:7001
+  #   volumes:
+  #     - .:/app
+  #   environment:
+  #     - TZ=Asia/Shanghai
+  #   # depends_on:
+  #   #   - mongo
+  #   # links:
+  #   #   - mongo
+  #   expose:
+  #     - 7001
