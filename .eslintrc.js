@@ -3,7 +3,7 @@
  * @Description  : eslint
  * @Autor        : Qzr(z5021996@vip.qq.com)
  * @LastEditors  : Qzr(z5021996@vip.qq.com)
- * @LastEditTime : 2021-12-16 10:46:25
+ * @LastEditTime : 2021-12-20 17:24:27
  */
 
 
@@ -31,5 +31,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    "no-useless-constructor": 'off',
+    "no-empty-function": 'off',
+    "guard-for-in": 'off'
   },
 };

@@ -14,9 +14,9 @@ services:
     image: mysql:5.6
     restart: always
     volumes:        #挂载当前的data目录到容器默认mysql存储目录
-      - ./mysql/mydir:/mydir
-      - ./mysql/datadir:/var/lib/mysql
-      - ./mysql/conf/my.cnf:/etc/my.cnf
+      - ../mysql/mydir:/mydir
+      - ../mysql/datadir:/var/lib/mysql
+      - ../mysql/conf/my.cnf:/etc/my.cnf
       #      数据库还原目录 可将需要还原的sql文件放在这里
       - /mysql/docker/source:/docker-entrypoint-initdb.d
     environment:                        #环境变量
@@ -27,13 +27,14 @@ services:
     ports:
       - "3306:3306"
   app:
-    image: node:12-alpine
-    working_dir: /code
+    container_name: app
+    image: node:16-alpine
+    working_dir: /app
     volumes:
-      - .:/code:cached
+      - ../:/app:cached
     ports:
       - 7001:7001
-    command: npm run start:dev
+    command: yarn start:dev
   # app:
   #   container_name: app
   #   build: .
