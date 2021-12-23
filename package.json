@@ -23,7 +23,8 @@
     "cz": "git add . && git cz",
     "docker:dev": "docker-compose up",
     "docker:release": "docker build -t page-blog:back-v1 .",
-    "release": "yarn build && yarn docker:release"
+    "release": "yarn build && yarn docker:release",
+    "release:hub": "docker push constq/page-blog:back-v1"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.3",
