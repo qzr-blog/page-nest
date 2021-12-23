@@ -1,15 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request } from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common'
+import { ApiTags, ApiOkResponse, ApiHeader, ApiBearerAuth } from '@nestjs/swagger'
 import { ArticleService } from './article.service'
 import { CreateArticleDto } from './dto/create-article.dto'
 import { UpdateArticleDto } from './dto/update-article.dto'
-import { Article } from './entities/article.entity'
+import { IdDTO } from './dto/id.dto'
+import { AuthGuard } from '@nestjs/passport'
+import { ArticleInfoVO, ArticleInfoResponse } from './vo/article-info.vo'
 
 @Controller('article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() createArticleDto: CreateArticleDto): Promise<Article> {
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: '创建文章', type: ArticleInfoResponse })
+  create(@Body() createArticleDto: CreateArticleDto) {
     return this.articleService.create(createArticleDto)
   }
 
@@ -19,17 +25,23 @@ export class ArticleController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.articleService.findOne(Number(id))
+  findOne(@Param('id') id: number) {
+    return this.articleService.findOne(id)
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
-    return this.articleService.update(Number(id), updateArticleDto)
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: '编辑文章', type: ArticleInfoResponse })
+  update(@Param('id') id: number, @Body() updateArticleDto: UpdateArticleDto) {
+    return this.articleService.update(id, updateArticleDto)
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.articleService.remove(Number(id))
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: '删除文章', type: ArticleInfoResponse })
+  remove(@Param('id') id: number) {
+    return this.articleService.remove(id)
   }
 }

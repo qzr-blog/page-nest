@@ -1,14 +1,11 @@
-FROM node:12-alpine
+FROM node:16-alpine
 LABEL maintainer="z5021996@vip.qq.com"
-
-# npm镜像，解决报错而引入
-RUN npm config set registry https://registry.npm.taobao.org
 
 # 复制代码
 COPY . /app
 
 # 设置容器启动后的默认运行目录
-WORKDIR /app
+WORKDIR /app/dist
 
 # 运行命令，安装依赖
 # RUN 命令可以有多个，但是可以用 && 连接多个命令来减少层级。
@@ -21,4 +18,4 @@ EXPOSE 7001
 # CMD 指令只能一个，是容器启动后执行的命令，算是程序的入口。
 # 如果还需要运行其他命令可以用 && 连接，也可以写成一个shell脚本去执行。
 # 例如 CMD cd /app && ./start.sh
-CMD yarn start:dev
+CMD node main.js

@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateArticleDto } from './dto/create-article.dto'
 import { UpdateArticleDto } from './dto/update-article.dto'
+import { IdDTO } from './dto/id.dto'
 
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
@@ -20,24 +21,41 @@ export class ArticleService {
     }
     const result = await this.articleRepository.save(article)
 
-    return {
-      info: result
+    return result
+  }
+
+  async findAll() {
+    const getList = this.articleRepository
+      .createQueryBuilder('article')
+      .where({ isDelete: false })
+      .select(['article.id', 'article.title', 'article.description', 'article.createTime', 'article.updateTime'])
+
+    const list = await getList
+    return list
+  }
+
+  async findOne(id: number) {
+    const articleDetial = await this.articleRepository.createQueryBuilder('article').where('article.id = :id', { id }).getOne()
+
+    if (!articleDetial) {
+      throw new NotFoundException('找不到文章')
     }
+    return articleDetial
   }
 
-  findAll() {
-    return `This action returns all article`
+  async update(id: number, updateArticleDto: UpdateArticleDto) {
+    let articleToUpdate = await this.articleRepository.findOne({ id })
+    articleToUpdate.title = updateArticleDto.title
+    articleToUpdate.description = updateArticleDto.description
+    articleToUpdate.content = updateArticleDto.content
+    const result = await this.articleRepository.save(articleToUpdate)
+    return result
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} article`
-  }
-
-  update(id: number, updateArticleDto: UpdateArticleDto) {
-    return `This action updates a #${id} article`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} article`
+  async remove(id: number) {
+    let articleToUpdate = await this.articleRepository.findOne({ id })
+    articleToUpdate.isDelete = true
+    const result = await this.articleRepository.save(articleToUpdate)
+    return result
   }
 }

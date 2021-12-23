@@ -6,7 +6,7 @@ import { HttpService } from '@nestjs/axios'
 export class PluginController {
   constructor(private readonly pluginService: PluginService, private httpService: HttpService) {}
 
-  @Get()
+  @Get('/hitokoto')
   getHitokoto() {
     return this.pluginService.getHitokoto()
   }

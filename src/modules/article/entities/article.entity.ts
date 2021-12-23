@@ -1,5 +1,6 @@
-import { Column, VersionColumn, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import { Entity, Column, VersionColumn, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
 
+@Entity()
 export class Article {
   // 自增 id
   @PrimaryGeneratedColumn()
