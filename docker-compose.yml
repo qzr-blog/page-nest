@@ -33,7 +33,7 @@ services:
     volumes:
       - .:/app:cached
     ports:
-      - 7001:7001
+      - 7009:7009
     command: yarn start:dev
   # app:
   #   container_name: app
