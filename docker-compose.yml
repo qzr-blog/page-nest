@@ -1,14 +1,6 @@
-version: "3"
+version: "3.8"
 
 services:
-  # mongo:
-  #   container_name: mongodb
-  #   image: mongo
-  #   restart: 'always'
-  #   volumes:
-  #     - ./mongo:/data
-  #   environment:
-  #     - TZ=Asia/Shanghai
   mysql:
     container_name: mysql
     image: mysql:5.6
@@ -21,32 +13,22 @@ services:
       - ./mysql/docker/source:/docker-entrypoint-initdb.d
     environment:                        #环境变量
       MYSQL_USER: qzr
-      MYSQL_PASS: 888888
-      MYSQL_ROOT_PASSWORD: 888888    #mysql的root密码
+      MYSQL_PASS: 66668888
+      MYSQL_ROOT_PASSWORD: 66668888    #mysql的root密码
       MYSQL_DATABASE: page     #mysql的初始化数据库
+      TZ: Asia/Shanghai
     ports:
-      - "3311:3306"
-  app:
-    container_name: app
-    image: node:16-alpine
-    working_dir: /app
-    volumes:
-      - .:/app:cached
-    ports:
-      - 7009:7009
-    command: yarn start:dev
+      - "3306:3306"
   # app:
   #   container_name: app
-  #   build: .
-  #   ports:
-  #     - 7001:7001
+  #   image: node:16-alpine
+  #   working_dir: /app
   #   volumes:
   #     - .:/app
+  #   ports:
+  #     - 7009:7009
+  #   depends_on:
+  #     - mysql
   #   environment:
-  #     - TZ=Asia/Shanghai
-  #   # depends_on:
-  #   #   - mongo
-  #   # links:
-  #   #   - mongo
-  #   expose:
-  #     - 7001
+  #     TZ: Asia/Shanghai
+  #   command: yarn start:dev

@@ -1,3 +1,5 @@
+import { join } from 'path'
+
 export default {
   // 服务基本配置
   SERVICE_CONFIG: {
@@ -15,13 +17,15 @@ export default {
   // 数据库配置
   DATABASE_CONFIG: {
     type: 'mysql',
-    host: 'mysql',
+    // host: 'mysql',
+    host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '888888',
+    password: '66668888',
     database: 'page',
-    entities: ['../dist/modules/**/*.entity{.ts,.js}'],
-    // entities: ['dist/**/*.entity{.ts,.js}'],
+    // entities: ['../dist/modules/**/*.entity{.ts,.js}'],
+    // entities: [`./src/**/*.entity{.ts,.js}`],
+    entities: ['dist/**/*.entity.js'],
     synchronize: true,
     charset: 'utf8mb4',
     logging: false

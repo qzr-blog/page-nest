@@ -18,7 +18,7 @@ export default {
     host: 'mysql',
     port: 3306,
     username: 'root',
-    password: '888888',
+    password: '66668888',
     database: 'page',
     entities: ['../dist/modules/**/*.entity{.ts,.js}'],
     synchronize: true,

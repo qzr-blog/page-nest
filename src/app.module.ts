@@ -7,6 +7,7 @@ import { UserModule } from './modules/user/user.module'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import envConfig from './config'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { CrawlerModule } from './modules/crawler/crawler.module'
 
 @Module({
   controllers: [AppController],
@@ -30,7 +31,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
     }),
     PluginModule,
     ArticleModule,
-    UserModule
+    UserModule,
+    CrawlerModule
   ]
 })
 export class AppModule {}
