@@ -20,7 +20,7 @@ export class CrawlerService {
       }
     ]
 
-    // const promiseList = Promise.allSettled(promiseArr.map((x) => this.httpService.get(x.url)))
+    const promiseList = Promise.allSettled(promiseArr.map((x) => this.httpService.get(x.url)))
 
     const res = await this.httpService.get('https://www.smzdm.com/fenlei/diannaopeijian/h3c4s0f0t0p1/#feed-main/')
     const response = await lastValueFrom(res)

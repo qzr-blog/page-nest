@@ -20,7 +20,8 @@ export default {
     username: 'root',
     password: '66668888',
     database: 'page',
-    entities: ['../dist/modules/**/*.entity{.ts,.js}'],
+    // entities: ['../dist/modules/**/*.entity{.ts,.js}'],
+    entities: ['dist/**/*.entity.js'],
     synchronize: true,
     charset: 'utf8mb4',
     logging: true
