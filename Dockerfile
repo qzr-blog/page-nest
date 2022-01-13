@@ -18,4 +18,4 @@ EXPOSE 7009
 # CMD 指令只能一个，是容器启动后执行的命令，算是程序的入口。
 # 如果还需要运行其他命令可以用 && 连接，也可以写成一个shell脚本去执行。
 # 例如 CMD cd /app && ./start.sh
-CMD npm run dev
+CMD npm run start:dev
