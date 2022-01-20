@@ -76,7 +76,7 @@ export class CrawlerService {
         const chance = getChance($(e))
         if (chance.chance !== 0) {
           resArr.push({
-            title: $(e).find('.feed-block-title .feed-nowrap').text(),
+            title: $(e).find('.feed-block-title .feed-nowrap').text().trim(),
             price: $(e).find('.feed-block-title .z-highlight').text().trim(),
             chance: chance.chance,
             url: $(e).find('.feed-block-title a').attr('href'),
@@ -97,7 +97,7 @@ export class CrawlerService {
         const chance = getChance($(e))
         if (chance.chance !== 0) {
           resArr.push({
-            title: $(e).find('.feed-block-title a').text(),
+            title: $(e).find('.feed-block-title a').text().trim(),
             price: $(e).find('.z-highlight a').text().trim(),
             chance: chance.chance,
             url: $(e).find('.feed-block-title a').attr('href'),
@@ -116,9 +116,9 @@ export class CrawlerService {
       let resArr = []
       $('.feed-list-col .J_feed_za').each((i, e) => {
         resArr.push({
-          title: $(e).find('.feed-ver-title a').text(),
+          title: $(e).find('.feed-ver-title a').text().trim(),
           price: $(e).find('.z-highlight').text().trim(),
-          url: $(e).find('.feed-block-title a').attr('href'),
+          url: $(e).find('.feed-ver-title a').attr('href'),
           comment: $(e).find('.z-group-data').last().text(),
           img: `https://images.weserv.nl/?url=${$(e).find('.feed-ver-pic img').attr('src')}`,
           up: $(e).find('.unvoted-wrap').text()

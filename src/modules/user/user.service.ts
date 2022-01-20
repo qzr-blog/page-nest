@@ -37,7 +37,7 @@ export class UserService {
   async register(registerDTO: RegisterDTO): Promise<any> {
     await this.checkRegisterForm(registerDTO)
 
-    const { nickname, password, mobile } = registerDTO
+    const { nickname, password, mobile, email } = registerDTO
     const salt = makeSalt() // 制作密码盐
     const hashPassword = encryptPassword(password, salt) // 加密密码
 
@@ -46,6 +46,7 @@ export class UserService {
     newUser.mobile = mobile
     newUser.password = hashPassword
     newUser.salt = salt
+    newUser.email = email
     const result = await this.userRepository.save(newUser)
     return result
   }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsString, Matches } from 'class-validator'
+import { IsNotEmpty, IsString, Matches, IsEmail } from 'class-validator'
 import { regMobileCN } from 'src/utils/regex.util'
 
 export class RegisterDTO {
@@ -18,6 +18,14 @@ export class RegisterDTO {
   @IsNotEmpty({ message: '请输入用户昵称' })
   @IsString({ message: '名字必须是 String 类型' })
   readonly nickname: string
+
+  @ApiProperty({
+    description: '用户名',
+    example: 'Qzr'
+  })
+  @IsNotEmpty({ message: '请输入邮箱' })
+  @IsEmail({ message: '邮箱类型' })
+  readonly email: string
 
   @ApiProperty({
     description: '用户密码',
