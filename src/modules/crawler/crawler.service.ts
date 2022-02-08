@@ -2,8 +2,9 @@ import { Injectable, CACHE_MANAGER, Inject } from '@nestjs/common'
 import { CreateCrawlerDto } from './dto/create-crawler.dto'
 import { HttpService } from '@nestjs/axios'
 import { Cache } from 'cache-manager'
-import getSmzdm from './script/getSmzdm'
 import { Cron } from '@nestjs/schedule'
+
+import getSmzdm from './script/getSmzdm'
 
 @Injectable()
 export class CrawlerService {
