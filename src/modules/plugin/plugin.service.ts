@@ -23,8 +23,8 @@ export class PluginService {
   }
 
   async getEverydayMsg() {
-    const res = await everydayMsg.call(this)
-    // const res = await this.cacheManager.get('everydayMsg')
+    // const res = await everydayMsg.call(this)
+    const res = await this.cacheManager.get('everydayMsg')
     return res
   }
 }

@@ -5,7 +5,7 @@ import 'dayjs/locale/zh-cn'
 const txKey = 'cad9aba47305ebce4b84d90281b1f543'
 
 export default async function () {
-  let str = 'to 蝶宝 \n '
+  let str = 'to 蝶宝 \n 然宝提醒你 \n'
 
   const moring = str + `${await getMoring.call(this)} \n`
 
@@ -19,13 +19,16 @@ export default async function () {
 
   const news = str + `${await getNews.call(this)} \n`
 
+  const areanews = str + `${await getAreanews.call(this)} \n`
+
   return {
     moring,
     fish,
     chp,
     love,
     night,
-    news
+    news,
+    areanews
   }
 }
 
@@ -33,18 +36,22 @@ export default async function () {
  * 获取彩虹屁
  */
 async function getChp() {
+  let str = ''
   const chpRes = await this.httpService.get(`http://api.tianapi.com/caihongpi/index?key=${txKey}`)
   const chpResponse: any = await lastValueFrom(chpRes)
-  return chpResponse.data.newslist[0].content
+  str += chpResponse.data.newslist[0].content
+  return str
 }
 
 /**
  * 获取土味情话
  */
 async function getLove() {
+  let str = ''
   const loveRes = await this.httpService.get(`http://api.tianapi.com/saylove/index?key=${txKey}`)
   const loveResponse: any = await lastValueFrom(loveRes)
-  return loveResponse.data.newslist[0].content
+  str += loveResponse.data.newslist[0].content
+  return str
 }
 
 /**
@@ -54,7 +61,7 @@ async function getHoliday() {
   dayjs.locale('zh-cn')
   const now = dayjs()
   const nowString = now.format('YYYY-MM-DD')
-  let str = `今天是${nowString} 然宝提醒你现在是摸鱼时间 \n`
+  let str = `现在是摸鱼时间 \n今天是${nowString} \n`
 
   const jjrRes = await this.httpService.get(`http://api.tianapi.com/jiejiari/index?key=${txKey}&date=${nowString}&type=1`)
   const jjrResponse: any = await lastValueFrom(jjrRes)
@@ -70,7 +77,7 @@ async function getHoliday() {
     item.until = dayjs(holidayFirst).diff(now, 'day')
     if (item.until < 0) continue
 
-    str += `距离${item.name}还有：${item.until}天 \n `
+    str += `距离${item.name}还有：${item.until}天 \n`
   }
   return str
 }
@@ -79,31 +86,50 @@ async function getHoliday() {
  * 获取早安心语
  */
 async function getMoring() {
+  let str = '该起床啦 不要睡懒觉当居居哦 \n'
   const mroingRes = await this.httpService.get(`http://api.tianapi.com/zaoan/index?key=${txKey}`)
   const mroingResponse: any = await lastValueFrom(mroingRes)
-  return mroingResponse.data.newslist[0].content
+  str += mroingResponse.data.newslist[0].content
+  return str
 }
 
 /**
  * 获取晚安心语
  */
 async function getNight() {
+  let str = '该碎觉啦 不准熬夜 要打屁屁哦 \n'
   const nightRes = await this.httpService.get(`http://api.tianapi.com/wanan/index?key=${txKey}`)
   const nightResponse: any = await lastValueFrom(nightRes)
-  return nightResponse.data.newslist[0].content
+  str += nightResponse.data.newslist[0].content
+  return str
 }
 
 /**
  * 获取新闻
  */
 async function getNews() {
-  let str = ''
+  let str = '现在是新闻时间 \n'
   const newsRes = await this.httpService.get(`http://api.tianapi.com/networkhot/index?key=${txKey}`)
   const newsResponse: any = await lastValueFrom(newsRes)
 
   for (const item of newsResponse.data.newslist) {
-    str += `${item.title} /n `
-    str += `${item.digest} /n`
+    str += `${item.title} \n `
+    // str += `${item.digest} \n`
+  }
+  return str
+}
+
+/**
+ * 获取湖北新闻
+ */
+async function getAreanews() {
+  let str = '现在是湖北新闻时间 \n'
+  const newsRes = await this.httpService.get(`http://api.tianapi.com/areanews/index?key=${txKey}&areaname=湖北`)
+  const newsResponse: any = await lastValueFrom(newsRes)
+
+  for (const item of newsResponse.data.newslist) {
+    str += `${item.title} \n `
+    // str += `${item.digest} \n`
   }
   return str
 }
