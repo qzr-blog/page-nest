@@ -7,7 +7,7 @@ export class CrawlerController {
   constructor(private readonly crawlerService: CrawlerService) {}
 
   @Post('/smzdm')
-  create(@Body() createCrawlerDto: CreateCrawlerDto) {
-    return this.crawlerService.getSmzdm(createCrawlerDto)
+  getSmzdm() {
+    return this.crawlerService.getSmzdm()
   }
 }

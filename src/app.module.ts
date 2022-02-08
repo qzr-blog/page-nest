@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { Module, CacheModule } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { PluginModule } from './modules/plugin/plugin.module'
@@ -8,6 +8,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import envConfig from './config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { CrawlerModule } from './modules/crawler/crawler.module'
+import * as redisStore from 'cache-manager-redis-store'
+import { ScheduleModule } from '@nestjs/schedule'
 
 @Module({
   controllers: [AppController],
@@ -29,10 +31,18 @@ import { CrawlerModule } from './modules/crawler/crawler.module'
         return DATABASE_CONFIG
       } // 获取配置信息
     }),
+    CacheModule.register({
+      store: redisStore,
+      port: 6379,
+      host: 'localhost',
+      password: 66668888,
+      isGlobal: true
+    }),
     PluginModule,
     ArticleModule,
     UserModule,
-    CrawlerModule
+    CrawlerModule,
+    ScheduleModule.forRoot()
   ]
 })
 export class AppModule {}

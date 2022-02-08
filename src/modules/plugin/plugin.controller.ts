@@ -10,4 +10,9 @@ export class PluginController {
   getHitokoto() {
     return this.pluginService.getHitokoto()
   }
+
+  @Get('/everydayMsg')
+  getEverydayMsg() {
+    return this.pluginService.getEverydayMsg()
+  }
 }

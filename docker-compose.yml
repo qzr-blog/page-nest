@@ -19,6 +19,20 @@ services:
       TZ: Asia/Shanghai
     ports:
       - "3306:3306"
+  redis:
+    image: redis:alpine
+    container_name: redis
+    command: redis-server --appendonly yes
+    volumes:
+      - ./redis/data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/logs:/logs
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+    environment:
+      TZ: Asia/Shanghai
   # app:
   #   container_name: app
   #   image: node:16-alpine

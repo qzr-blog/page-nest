@@ -3,6 +3,7 @@
     "module": "commonjs",
     "target": "esnext",
     "lib": ["esnext"],
+    "esModuleInterop": true,
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
