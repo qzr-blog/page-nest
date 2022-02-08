@@ -10,7 +10,7 @@ import getSmzdm from './script/getSmzdm'
 export class CrawlerService {
   constructor(private httpService: HttpService, @Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
-  @Cron('0 0/20 * * *')
+  @Cron('0 */20 * * * *')
   async getSmzdmCron() {
     const finallyArr = await getSmzdm.call(this)
     await this.cacheManager.set('finallyArr', finallyArr, { ttl: 0 })
