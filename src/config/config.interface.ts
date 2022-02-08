@@ -33,4 +33,13 @@ export interface Config {
       expiresIn: string // token 过期时效
     }
   }
+
+  // redis配置
+  REDIS_CONFIG: {
+    store: any
+    port: number
+    host: string
+    password: number
+    isGlobal: boolean
+  }
 }

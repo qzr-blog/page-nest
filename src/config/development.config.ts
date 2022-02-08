@@ -1,4 +1,4 @@
-import { join } from 'path'
+import * as redisStore from 'cache-manager-redis-store'
 
 export default {
   // 服务基本配置
@@ -37,5 +37,13 @@ export default {
     signOptions: {
       expiresIn: '24h' // token 过期时效
     }
+  },
+
+  REDIS_CONFIG: {
+    store: redisStore,
+    port: 6379,
+    host: 'localhost',
+    password: 66668888,
+    isGlobal: true
   }
 }

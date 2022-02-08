@@ -31,13 +31,14 @@ import { ScheduleModule } from '@nestjs/schedule'
         return DATABASE_CONFIG
       } // 获取配置信息
     }),
-    CacheModule.register({
-      store: redisStore,
-      port: 6379,
-      host: 'localhost',
-      password: 66668888,
-      isGlobal: true
-    }),
+    // CacheModule.register({
+    //   store: redisStore,
+    //   port: 6379,
+    //   host: 'localhost',
+    //   password: 66668888,
+    //   isGlobal: true
+    // }),
+    CacheModule.register(envConfig()['REDIS_CONFIG']),
     PluginModule,
     ArticleModule,
     UserModule,
