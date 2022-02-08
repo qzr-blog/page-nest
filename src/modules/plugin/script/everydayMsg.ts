@@ -1,6 +1,5 @@
 import { lastValueFrom } from 'rxjs'
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/RelativeTime'
 import 'dayjs/locale/zh-cn'
 
 const txKey = 'cad9aba47305ebce4b84d90281b1f543'
@@ -44,7 +43,6 @@ async function getHoliday() {
     if (wage.includes('|')) holidayFirst = wage.split('|')[0]
     else holidayFirst = wage
 
-    dayjs.extend(relativeTime)
     item.until = dayjs(holidayFirst).diff(now, 'day')
     if (item.until < 0) continue
 
