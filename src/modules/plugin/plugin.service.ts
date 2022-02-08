@@ -10,10 +10,16 @@ import everydayMsg from './script/everydayMsg'
 export class PluginService {
   constructor(private httpService: HttpService, @Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
-  async getHitokoto() {
+  @Cron('0 */10 * * *')
+  async getHitokotoVal() {
     const res = await this.httpService.get('https://v1.hitokoto.cn?c=d')
     const response = await lastValueFrom(res)
-    return response.data
+    await this.cacheManager.set('hitokoto', response.data, { ttl: 0 })
+  }
+
+  async getHitokoto() {
+    const res = await this.cacheManager.get('hitokoto')
+    return res
   }
 
   @Cron('0 0 2 * *')
