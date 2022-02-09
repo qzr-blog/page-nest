@@ -124,7 +124,7 @@ async function getNews() {
  */
 async function getAreanews() {
   let str = '现在是湖北新闻时间 \n'
-  const newsRes = await this.httpService.get(`http://api.tianapi.com/areanews/index?key=${txKey}&areaname=湖北`)
+  const newsRes = await this.httpService.get(`http://api.tianapi.com/areanews/index?key=${txKey}&areaname=${encodeURI('湖北')}`)
   const newsResponse: any = await lastValueFrom(newsRes)
 
   for (const item of newsResponse.data.newslist) {
