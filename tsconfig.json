@@ -4,14 +4,14 @@
     "target": "esnext",
     "lib": ["esnext"],
     "esModuleInterop": true,
-    "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "sourceMap": true,
+    "declaration": true,
     "incremental": true
   }
 }

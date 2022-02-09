@@ -5,11 +5,11 @@ import 'dayjs/locale/zh-cn'
 const txKey = 'cad9aba47305ebce4b84d90281b1f543'
 
 export default async function () {
-  let str = 'to 蝶宝 \n 然宝提醒你 \n'
+  let str = 'to 蝶宝 \n然宝提醒你 \n'
 
   const moring = str + `${await getMoring.call(this)} \n`
 
-  const chp = str + `${await getChp.call(this)} \n `
+  const chp = str + `${await getChp.call(this)} \n`
 
   const fish = str + `${await getHoliday.call(this)} \n`
 
@@ -113,7 +113,7 @@ async function getNews() {
   const newsResponse: any = await lastValueFrom(newsRes)
 
   for (const item of newsResponse.data.newslist) {
-    str += `${item.title} \n `
+    str += `${item.title} \n`
     // str += `${item.digest} \n`
   }
   return str
@@ -128,7 +128,7 @@ async function getAreanews() {
   const newsResponse: any = await lastValueFrom(newsRes)
 
   for (const item of newsResponse.data.newslist) {
-    str += `${item.title} \n `
+    str += `${item.title} \n`
     // str += `${item.digest} \n`
   }
   return str
