@@ -36,10 +36,6 @@ export class User {
   @VersionColumn()
   version: number
 
-  // 昵称
-  @Column('text')
-  nickname: string
-
   // 手机号
   @Column('text')
   mobile: string

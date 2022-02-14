@@ -17,11 +17,11 @@ export class RegisterDTO {
   })
   @IsNotEmpty({ message: '请输入用户昵称' })
   @IsString({ message: '名字必须是 String 类型' })
-  readonly nickname: string
+  readonly username: string
 
   @ApiProperty({
-    description: '用户名',
-    example: 'Qzr'
+    description: '邮箱',
+    example: 'z5021996@vip.qq.com'
   })
   @IsNotEmpty({ message: '请输入邮箱' })
   @IsEmail({ message: '邮箱类型' })

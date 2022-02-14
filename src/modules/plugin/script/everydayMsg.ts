@@ -5,7 +5,7 @@ import 'dayjs/locale/zh-cn'
 const txKey = 'cad9aba47305ebce4b84d90281b1f543'
 
 export default async function () {
-  let str = 'to 蝶宝 \n然宝提醒你 \n'
+  let str = 'to 蝶宝\n然宝提醒你\n'
 
   const moring = str + `${await getMoring.call(this)} \n`
 
