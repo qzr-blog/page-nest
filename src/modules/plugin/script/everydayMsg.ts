@@ -108,14 +108,13 @@ async function getNight() {
  * 获取新闻
  */
 async function getNews() {
-  let str = '现在是新闻时间 \n'
+  let str = '每日早报 1分钟看世界 \n'
   const newsRes = await this.httpService.get(`http://api.tianapi.com/networkhot/index?key=${txKey}`)
   const newsResponse: any = await lastValueFrom(newsRes)
 
-  for (const item of newsResponse.data.newslist) {
-    str += `${item.title} \n`
-    // str += `${item.digest} \n`
-  }
+  newsResponse.data.newslist.forEach((item: any, index: number) => {
+    str += `${index + 1}、${item.title}； \n\n`
+  })
   return str
 }
 
@@ -123,13 +122,13 @@ async function getNews() {
  * 获取湖北新闻
  */
 async function getAreanews() {
-  let str = '现在是湖北新闻时间 \n'
+  let str = '每日新闻 1分钟看湖北 \n'
   const newsRes = await this.httpService.get(`http://api.tianapi.com/areanews/index?key=${txKey}&areaname=${encodeURI('湖北')}`)
   const newsResponse: any = await lastValueFrom(newsRes)
 
-  for (const item of newsResponse.data.newslist) {
-    str += `${item.title} \n`
-    // str += `${item.digest} \n`
-  }
+  newsResponse.data.newslist.forEach((item: any, index: number) => {
+    str += `${index + 1}、${item.title}； \n\n`
+  })
+
   return str
 }
