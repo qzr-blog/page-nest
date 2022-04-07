@@ -31,8 +31,8 @@ export default async function () {
       url: 'https://www.smzdm.com/fenlei/diannaopeijian/h3c4s0f0t0p1/#feed-main/'
     },
     {
-      title: 'ipad air4',
-      url: 'https://search.smzdm.com/?c=faxian&s=ipad+air4&f_c=zhi&min_price=3000&max_price=6000&v=b'
+      title: 'ipad air5',
+      url: 'https://search.smzdm.com/?c=faxian&s=ipad+air5&f_c=zhi&min_price=3000&max_price=6000&v=b'
     }
   ]
 
