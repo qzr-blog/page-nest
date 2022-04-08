@@ -100,7 +100,7 @@ export default async function () {
       const chance = getChance($(e))
       if (chance.chance !== 0) {
         const info = {
-          title: $(e).find('.feed-block-title .feed-nowrap').text().trim(),
+          title: $(e).find('.feed-block-title .feed-nowrap').text().trim().replace(/\s*/g, ''),
           price: $(e).find('.feed-block-title .z-highlight').text().trim(),
           chance: chance.chance,
           url: $(e).find('.feed-block-title a').attr('href'),
@@ -122,7 +122,7 @@ export default async function () {
       const chance = getChance($(e))
       if (chance.chance !== 0) {
         const info = {
-          title: $(e).find('.feed-block-title a').text().trim(),
+          title: $(e).find('.feed-block-title a').text().trim().replace(/\s*/g, ''),
           price: $(e).find('.z-highlight a').text().trim(),
           chance: chance.chance,
           url: $(e).find('.feed-block-title a').attr('href'),
@@ -142,7 +142,7 @@ export default async function () {
     let resArr: goodsInfo[] = []
     $('.feed-list-col .J_feed_za').each((i, e) => {
       const info = {
-        title: $(e).find('.feed-ver-title a').text().trim(),
+        title: $(e).find('.feed-ver-title a').text().trim().replace(/\s*/g, ''),
         price: $(e).find('.z-highlight').text().trim(),
         url: $(e).find('.feed-ver-title a').attr('href'),
         comment: $(e).find('.z-group-data').last().text(),
