@@ -33,16 +33,16 @@ services:
       - 6379:6379
     environment:
       TZ: Asia/Shanghai
-  # app:
-  #   container_name: app
-  #   image: node:16-alpine
-  #   working_dir: /app
-  #   volumes:
-  #     - .:/app
-  #   ports:
-  #     - 7009:7009
-  #   depends_on:
-  #     - mysql
-  #   environment:
-  #     TZ: Asia/Shanghai
-  #   command: yarn start:dev
+  app:
+    container_name: app
+    image: node:16-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - 7009:7009
+    depends_on:
+      - mysql
+    environment:
+      TZ: Asia/Shanghai
+    command: yarn start:dev
